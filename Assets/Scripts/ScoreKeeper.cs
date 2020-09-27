@@ -15,13 +15,12 @@ public class ScoreKeeper : MonoBehaviour {
 
     public void Score(int points)
     {
-        score += points;//adds to what it currently equals or simply increased by.
-        myText.text = score.ToString(); //it finds the text that this script is attached to and it does something with ToString.
+        score += points;
+        myText.text = score.ToString();
     }
 
     public static void Reset()
     {
         score = 0;
     }
-	
 }

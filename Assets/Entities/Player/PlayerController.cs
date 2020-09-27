@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        float distance = transform.position.z - Camera.main.transform.position.z;
+        float distance = transform.position.z - Camera.main.transform.position.z; // All of this stuffin Start is just doing the same stuff as the Formation Controller script.
         Vector3 leftmost = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance));
         Vector3 rightmost = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distance));
         xmin = leftmost.x + padding;
@@ -28,9 +28,9 @@ public class PlayerController : MonoBehaviour {
 
     void Fire()
     {
-        Vector3 offset = new Vector3(0, 1, 0);
-      GameObject beam = Instantiate(projectile, transform.position + offset, Quaternion.identity) as GameObject;
-      beam.GetComponent<Rigidbody2D>().velocity = new Vector3(0,projectileSpeed,0);
+        Vector3 offset = new Vector3(0, 1, 0);                              // Spawns up the positive y axis by one so that it doesn't damage the Player by spawning on it!
+        GameObject beam = Instantiate(projectile, transform.position + offset, Quaternion.identity) as GameObject;
+        beam.GetComponent<Rigidbody2D>().velocity = new Vector3(0, projectileSpeed, 0);             // projectileSpeed shoots the laser up the screen (positive y axis).
         AudioSource.PlayClipAtPoint(fireSound, transform.position);
     }
 	
@@ -61,11 +61,11 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Projectile missile = collider.gameObject.GetComponent<Projectile>();
-        if (missile)
+        Projectile missileCollisionDetected = collider.gameObject.GetComponent<Projectile>(); // Projectile is a script that is attached to the lasers tagged as Projectile.
+        if (missileCollisionDetected)
         {
-            health -= missile.GetDamage();
-            missile.Hit();
+            health -= missileCollisionDetected.GetDamage();     // GetDamage() is in the Projectile script.
+            missileCollisionDetected.Hit();                     // Hit() is in the Projectile script.
             if (health <= 0)
             {
                 Die();

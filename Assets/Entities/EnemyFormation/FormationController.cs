@@ -16,10 +16,10 @@ public class FormationController : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        float distanceToCamera = transform.position.z - Camera.main.transform.position.z;
-        Vector3 leftBoundary = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distanceToCamera));
+        float distanceToCamera = transform.position.z - Camera.main.transform.position.z;                   // What?
+        Vector3 leftBoundary = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distanceToCamera));       // Stops the Player moving off screen.
         Vector3 rightBoundary = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distanceToCamera));
-        xmax = rightBoundary.x;
+        xmax = rightBoundary.x;                                                                             // The furtherst you can move in the x position.
         xmin = leftBoundary.x;
         SpawnUntilFull();
     }
