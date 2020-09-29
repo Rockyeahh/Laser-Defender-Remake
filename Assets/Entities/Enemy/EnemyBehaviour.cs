@@ -53,7 +53,7 @@ public class EnemyBehaviour : MonoBehaviour {
     void Die()
     {
                 AudioSource.PlayClipAtPoint(deathSound, transform.position); // The sound plays at the transform.position of the gameobject that this script on.
-                Destroy(gameObject);
+                Destroy(gameObject);             // CHANGE to disable gameObject.
                 scoreKeeper.Score(scoreValue);  // Updates score.
     }
 }
