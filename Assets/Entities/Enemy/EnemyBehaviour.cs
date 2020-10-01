@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EnemyBehaviour : MonoBehaviour {
     public float health = 150f;
+    public float startingHealth;
     public GameObject projectile;
     public float projectileSpeed = 10;
     public Rigidbody2D rb2D;
@@ -10,8 +11,16 @@ public class EnemyBehaviour : MonoBehaviour {
     public int scoreValue = 150;
     public AudioClip fireSound;
     public AudioClip deathSound;
+    public Vector3 startPosition;
 
     private ScoreKeeper scoreKeeper;
+
+
+    void Awake()
+    {
+        startPosition = transform.position;
+        startingHealth = health;
+    }
 
     void Start()
     {
@@ -52,9 +61,12 @@ public class EnemyBehaviour : MonoBehaviour {
 
     void Die()
     {
-                AudioSource.PlayClipAtPoint(deathSound, transform.position); // The sound plays at the transform.position of the gameobject that this script on.
-                //Destroy(gameObject);             // CHANGE to disable gameObject.
-                gameObject.SetActive(false);
-                scoreKeeper.Score(scoreValue);  // Updates score.
+        AudioSource.PlayClipAtPoint(deathSound, transform.position); // The sound plays at the transform.position of the gameobject that this script on.
+        //Destroy(gameObject);             // CHANGE to disable gameObject.
+        gameObject.SetActive(false);
+        //transform.position = startPosition; // Reset to starting position   // The tranform that needs to be rest is the enemy formation not the children.
+        health = startingHealth; // Reset enemy health
+        // Reset animation state? anim.trigger("Entry")???
+        scoreKeeper.Score(scoreValue);  // Updates score.
     }
 }

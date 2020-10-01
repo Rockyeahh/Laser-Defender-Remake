@@ -8,9 +8,13 @@ public class GameController : MonoBehaviour
     public GameObject[] enemies;
     public GameObject enemyBossPrefab;
 
+    //public Animation enemyFormationParentAnimationStart;
+
     // Start is called before the first frame update
     void Start()
     {
+        //enemyFormationParentAnimationStart = GetComponent<Animation>();
+
         // Enable Enemy gameObjects/children. // Game objects tagged as Enemy set disable
         if (enemies == null)
             enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -28,6 +32,8 @@ public class GameController : MonoBehaviour
     {
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
+            // THIS IS WHERE I should put the set animation to entry code. Get the game object component or whatever in start and then do the shit here.
+            //enemyFormationParentAnimationStart.Play("Entry");
             Reset();
         }
     }
@@ -44,10 +50,11 @@ public class GameController : MonoBehaviour
         //GameObject enemyBoss = Instantiate(enemyBossPrefab, transform.position, Quaternion.identity) as GameObject;
     }
 
-    // Reset Eneimes    // Reset Enemy transform.position, animations?
-    void Reset()
+    void Reset()    //Reset Enemies Maybe I should call it reset enemies?
     {
         print("Reset Enemies");
+        Start();    // This is too fast. It should be delayed by 2 or 3 seconds with a coroutine. OR have a if button pressed then call Start().
+                    // Using a button press to continue, would give them the chance to quit the game or go for a piss or something.
     }
 
 }
