@@ -6,6 +6,8 @@ public class EnemyFormationParent : MonoBehaviour
 {
     public Animation enemyFormationParentAnimationStart;
     public Vector3 startPosition;
+    private Animator animator;
+    //private GameController gameController;
 
     void Awake()
     {
@@ -15,6 +17,8 @@ public class EnemyFormationParent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //gameController = FindObjectOfType<GameController>();
+        animator = gameObject.GetComponent<Animator>();
         enemyFormationParentAnimationStart = GetComponent<Animation>();
     }
 
@@ -31,9 +35,16 @@ public class EnemyFormationParent : MonoBehaviour
             print("WORK");
             // The tranform that needs to be rest is the enemy formation not the children.
             transform.position = startPosition;
-            enemyFormationParentAnimationStart.Play("Enemy Formation Parent Move Right 1st");       // Not working! They are just continuing the previous animation state.
-            print("Entry");
+            //animator.SetTrigger("Enemies are all dead");
+            //enemyFormationParentAnimationStart.Play("Enemy Formation Parent Move Right 1st");       // Not working! They are just continuing the previous animation state.
+            print("Enemies are all dead trigger");
         }
 
     }
+
+    public void IdleAnimation()
+    {
+        gameObject.GetComponent<Animator>().Play("Idle");
+    }
+
 }

@@ -8,11 +8,14 @@ public class GameController : MonoBehaviour
     public GameObject[] enemies;
     public GameObject enemyBossPrefab;
 
+    private EnemyFormationParent enemyFormationParent;
+
     //public Animation enemyFormationParentAnimationStart;
 
     // Start is called before the first frame update
     void Start()
     {
+        enemyFormationParent = FindObjectOfType<EnemyFormationParent>();
         //enemyFormationParentAnimationStart = GetComponent<Animation>();
 
         // Enable Enemy gameObjects/children. // Game objects tagged as Enemy set disable
@@ -53,6 +56,7 @@ public class GameController : MonoBehaviour
     void Reset()    //Reset Enemies Maybe I should call it reset enemies?
     {
         print("Reset Enemies");
+        enemyFormationParent.IdleAnimation();
         Start();    // This is too fast. It should be delayed by 2 or 3 seconds with a coroutine. OR have a if button pressed then call Start().
                     // Using a button press to continue, would give them the chance to quit the game or go for a piss or something.
     }
