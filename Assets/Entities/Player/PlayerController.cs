@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour {
         AudioSource.PlayClipAtPoint(deathSound, transform.position);
         Destroy(gameObject);
         LevelManager man = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-        man.LoadLevel("Win Screen");
+        man.LoadScene("Win Screen");
     }
 
 }
