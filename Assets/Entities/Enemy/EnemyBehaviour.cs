@@ -32,6 +32,7 @@ public class EnemyBehaviour : MonoBehaviour {
         float probability = Time.deltaTime * shotsPerSecond;
         if (Random.value < probability)     // Stops the enemy from shooting in a predicatable way.
         {
+            // if no enemies bellow/raycast/line of sight check? bool == true then {fire();}
             Fire();
         }
 
