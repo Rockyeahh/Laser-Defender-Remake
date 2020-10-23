@@ -15,6 +15,10 @@ public class EnemyBehaviour : MonoBehaviour {
 
     private ScoreKeeper scoreKeeper;
 
+    //public bool safeToShoot = true;
+    public GameObject enemyCheckerObject;
+    EnemyChecker enemyChecker;
+
 
     void Awake()
     {
@@ -25,26 +29,41 @@ public class EnemyBehaviour : MonoBehaviour {
     void Start()
     {
         scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
+        enemyChecker = enemyCheckerObject.GetComponent<EnemyChecker>();
     }
 
     void Update()
     {
         float probability = Time.deltaTime * shotsPerSecond;
-        if (Random.value < probability)     // Stops the enemy from shooting in a predicatable way.
+
+        if (!enemyChecker.safeToShoot) // If safe to shoot == false.
         {
-            // if no enemies bellow/raycast/line of sight check? bool == true then {fire();}
-            Fire();
+            if (Random.value < probability)     // Stops the enemy from shooting in a predicatable way.
+            {
+                // if no enemies bellow/raycast/line of sight check? bool == true then {fire();}
+                Fire();
+            }
         }
+
 
     }
 
     void Fire()
     {
+         //if (enemyChecker().safeToShoot == true)
+        //{
         GameObject missile = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;    // Merely spawns the projectile.
         missile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, -projectileSpeed, 0);       // It's -projectileSpeed because it's moving down the screen in the -y axis.
         AudioSource.PlayClipAtPoint(fireSound, transform.position);
+        //}
+
+
     }
 
+   // void OnColisionEnter (Collision collision)
+  //  {
+        
+  //  }
 
     void OnTriggerEnter2D(Collider2D collider)
     {

@@ -6,7 +6,7 @@ public class GameController : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public GameObject[] enemies;
-    public GameObject enemyBossPrefab;
+    //public GameObject enemyBossPrefab;
 
     private EnemyFormationParent enemyFormationParent;
 
