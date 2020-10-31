@@ -36,7 +36,7 @@ public class EnemyBehaviour : MonoBehaviour {
     {
         float probability = Time.deltaTime * shotsPerSecond;
 
-        if (!enemyChecker.safeToShoot) // If safe to shoot == false.
+        if (enemyChecker.safeToShoot == true) // If safe to shoot == false.
         {
             if (Random.value < probability)     // Stops the enemy from shooting in a predicatable way.
             {
