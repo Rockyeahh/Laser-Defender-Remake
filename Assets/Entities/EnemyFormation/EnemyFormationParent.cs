@@ -23,7 +23,7 @@ public class EnemyFormationParent : MonoBehaviour
     {
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
-            print("WORK");
+            //print("WORK");
             transform.position = startPosition;
             print("Enemies are all dead trigger");
         }

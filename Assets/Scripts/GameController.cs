@@ -18,17 +18,26 @@ public class GameController : MonoBehaviour
         enemyFormationParent = FindObjectOfType<EnemyFormationParent>();
         //enemyFormationParentAnimationStart = GetComponent<Animation>();
 
-        // Enable Enemy gameObjects/children. // Game objects tagged as Enemy set disable
-        if (enemies == null)
-            enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //Start the coroutine we define below named ExampleCoroutine.
+        //  StartCoroutine(ExampleCoroutine());
 
-        foreach (GameObject Enemy in enemies)
-        {
-            print("work you cunt");
-            Enemy.SetActive(true);
-            print("Set enemy active");
-        }
+        Invoke("Reset", 200f);
+
     }
+
+  //  IEnumerator ExampleCoroutine()
+  //  {
+        //Print the time of when the function is first called.
+  //      Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+        //yield on a new YieldInstruction that waits for 5 seconds.
+  //      yield return new WaitForSeconds(5);
+
+        //After we have waited 5 seconds print the time again.
+    //    Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+    //    print("Reset");
+     //   Reset();
+   // }
 
     // Update is called once per frame
     void Update()
@@ -57,8 +66,21 @@ public class GameController : MonoBehaviour
     {
         print("Reset Enemies");
         enemyFormationParent.IdleAnimation();
-        Start();    // This is too fast. It should be delayed by 2 or 3 seconds with a coroutine. OR have a if button pressed then call Start().
-                    // Using a button press to continue, would give them the chance to quit the game or go for a piss or something.
+
+        // Enable Enemy gameObjects/children. // Game objects tagged as Enemy set disable
+        if (enemies == null)
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject Enemy in enemies)
+        {
+            //print("work you cunt");
+            Enemy.SetActive(true);
+            print("Set enemy active");
+        }
+
+        //Start();                   // This is too fast. It should be delayed by 2 or 3 seconds with a coroutine. OR have a if button pressed then call Start().
+                                  // Using a button press to continue, would give them the chance to quit the game or go for a piss or something.
+       //Invoke("Start", 2.0f);
     }
 
 }
