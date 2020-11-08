@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
         //Start the coroutine we define below named ExampleCoroutine.
         //  StartCoroutine(ExampleCoroutine());
 
-        Invoke("Reset", 200f);
+        //Invoke("Reset", 200f);
 
     }
 
@@ -46,7 +46,9 @@ public class GameController : MonoBehaviour
         {
             // THIS IS WHERE I should put the set animation to entry code. Get the game object component or whatever in start and then do the shit here.
             //enemyFormationParentAnimationStart.Play("Entry");
-            Reset();
+
+            Invoke("Reset", 2f);
+            //Reset();
         }
     }
 
