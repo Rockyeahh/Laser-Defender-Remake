@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public GameObject[] enemies;
     //public GameObject enemyBossPrefab;
+    public Text levelNumberText;
+    public static int levelNumber = 1;
 
     private EnemyFormationParent enemyFormationParent;
 
@@ -16,6 +19,9 @@ public class GameController : MonoBehaviour
     void Start()
     {
         enemyFormationParent = FindObjectOfType<EnemyFormationParent>();
+        GameObject levelNumberGameObject = GameObject.FindWithTag("Level Number");
+        levelNumberText = levelNumberGameObject.GetComponent<Text>();
+        //levelNumberText = gameObject.GetComponent<Text>();  // using gameObject didn't help.
         //enemyFormationParentAnimationStart = GetComponent<Animation>();
 
         //Start the coroutine we define below named ExampleCoroutine.
@@ -40,14 +46,18 @@ public class GameController : MonoBehaviour
    // }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        //print("level " + levelNumber);
+        levelNumberText.text = levelNumber.ToString();
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
             // THIS IS WHERE I should put the set animation to entry code. Get the game object component or whatever in start and then do the shit here.
             //enemyFormationParentAnimationStart.Play("Entry");
 
             Invoke("Reset", 2f);
+            //levelNumber++;
+            //levelNumberText.text = levelNumber.ToString();
             //Reset();
         }
     }
@@ -68,6 +78,8 @@ public class GameController : MonoBehaviour
     {
         print("Reset Enemies");
         enemyFormationParent.IdleAnimation();
+        levelNumber += 1;
+        //levelNumberText.text = levelNumber.ToString();
 
         // Enable Enemy gameObjects/children. // Game objects tagged as Enemy set disable
         if (enemies == null)
