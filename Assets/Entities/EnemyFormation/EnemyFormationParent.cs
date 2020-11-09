@@ -8,6 +8,8 @@ public class EnemyFormationParent : MonoBehaviour
     public Vector3 startPosition;
     private Animator animator;
 
+    private LevelNumberScript levelNumberScript;
+
     void Awake()
     {
         startPosition = transform.position;
@@ -17,6 +19,7 @@ public class EnemyFormationParent : MonoBehaviour
     {
         animator = gameObject.GetComponent<Animator>();
         enemyFormationParentAnimationStart = GetComponent<Animation>();
+        levelNumberScript = GameObject.Find("Level Number").GetComponent<LevelNumberScript>();
     }
 
     void Update()
@@ -33,6 +36,7 @@ public class EnemyFormationParent : MonoBehaviour
     public void IdleAnimation()
     {
         gameObject.GetComponent<Animator>().Play("Idle");
+        //levelNumberScript.LevelNumberInt(1);
     }
 
 }

@@ -14,6 +14,7 @@ public class EnemyBehaviour : MonoBehaviour {
     public Vector3 startPosition;
 
     private ScoreKeeper scoreKeeper;
+    private GameController gameController;
 
     //public GameObject enemyCheckerObject;
     //EnemyChecker enemyChecker;
@@ -28,6 +29,7 @@ public class EnemyBehaviour : MonoBehaviour {
     void Start()
     {
         scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
+        gameController = GameObject.Find("Game Controller").GetComponent<GameController>();
         //enemyChecker = enemyCheckerObject.GetComponent<EnemyChecker>();
     }
 
@@ -49,8 +51,6 @@ public class EnemyBehaviour : MonoBehaviour {
         GameObject missile = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;    // Merely spawns the projectile.
         missile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, -projectileSpeed, 0);       // It's -projectileSpeed because it's moving down the screen in the -y axis.
         AudioSource.PlayClipAtPoint(fireSound, transform.position);
-
-
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -76,5 +76,6 @@ public class EnemyBehaviour : MonoBehaviour {
         health = startingHealth; // Reset enemy health
         // Reset animation state? anim.trigger("Entry")???
         scoreKeeper.Score(scoreValue);  // Updates score.
+        //gameController.LevelNumber(1);
     }
 }

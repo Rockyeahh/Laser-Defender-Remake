@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
     public GameObject[] enemies;
     //public GameObject enemyBossPrefab;
     public Text levelNumberText;
-    public static int levelNumber = 1;
+    public int levelNumber = 1;
 
     private EnemyFormationParent enemyFormationParent;
 
@@ -49,12 +49,14 @@ public class GameController : MonoBehaviour
     void FixedUpdate()
     {
         //print("level " + levelNumber);
-        levelNumberText.text = levelNumber.ToString();
+        //levelNumberText.text = levelNumber.ToString();
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
             // THIS IS WHERE I should put the set animation to entry code. Get the game object component or whatever in start and then do the shit here.
             //enemyFormationParentAnimationStart.Play("Entry");
 
+            //levelNumber++;
+            //print("level number " + levelNumber);
             Invoke("Reset", 2f);
             //levelNumber++;
             //levelNumberText.text = levelNumber.ToString();
@@ -74,11 +76,19 @@ public class GameController : MonoBehaviour
         //GameObject enemyBoss = Instantiate(enemyBossPrefab, transform.position, Quaternion.identity) as GameObject;
     }
 
+    public void LevelNumber(int number)
+    {
+        //if (enemies == null)
+            //levelNumber += 1;
+        //print("level number " + levelNumber);
+        //levelNumberText.text = levelNumber.ToString();
+    }
+
     void Reset()    //Reset Enemies Maybe I should call it reset enemies?
     {
         print("Reset Enemies");
         enemyFormationParent.IdleAnimation();
-        levelNumber += 1;
+        //levelNumber += 1;
         //levelNumberText.text = levelNumber.ToString();
 
         // Enable Enemy gameObjects/children. // Game objects tagged as Enemy set disable
