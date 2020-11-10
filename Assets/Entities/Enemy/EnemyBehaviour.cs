@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class EnemyBehaviour : MonoBehaviour {
+
     public float health = 150f;
     public float startingHealth;
     public GameObject projectile;
@@ -14,11 +15,6 @@ public class EnemyBehaviour : MonoBehaviour {
     public Vector3 startPosition;
 
     private ScoreKeeper scoreKeeper;
-    private GameController gameController;
-
-    //public GameObject enemyCheckerObject;
-    //EnemyChecker enemyChecker;
-
 
     void Awake()
     {
@@ -29,21 +25,16 @@ public class EnemyBehaviour : MonoBehaviour {
     void Start()
     {
         scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
-        gameController = GameObject.Find("Game Controller").GetComponent<GameController>();
-        //enemyChecker = enemyCheckerObject.GetComponent<EnemyChecker>();
     }
 
     void Update()
     {
         float probability = Time.deltaTime * shotsPerSecond;
 
-        //if (enemyChecker.safeToShoot == true)
-        //{
             if (Random.value < probability)     // Stops the enemy from shooting in a predicatable way.
             {
                 Fire();
             }
-       // }
     }
 
     void Fire()
@@ -70,12 +61,8 @@ public class EnemyBehaviour : MonoBehaviour {
     void Die()
     {
         AudioSource.PlayClipAtPoint(deathSound, transform.position); // The sound plays at the transform.position of the gameobject that this script on.
-        //Destroy(gameObject);             // CHANGE to disable gameObject.
         gameObject.SetActive(false);
-        //transform.position = startPosition; // Reset to starting position   // The tranform that needs to be rest is the enemy formation not the children.
         health = startingHealth; // Reset enemy health
-        // Reset animation state? anim.trigger("Entry")???
         scoreKeeper.Score(scoreValue);  // Updates score.
-        //gameController.LevelNumber(1);
     }
 }

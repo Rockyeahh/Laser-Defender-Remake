@@ -10,8 +10,7 @@ public class PlayerController : MonoBehaviour {
     public float projectileSpeed;
     public float firingRate = 0.2f;
     public float health = 250f;
-    public AudioClip fireSound; //AudioClip is different to audio source somehow. Also fireSound is the name you create for it in the code and is something 
-    //i never think to do as I am used to worrying where to find the correct code online or in previous scripts as I don't know enough to write code myself.
+    public AudioClip fireSound; //AudioClip is the clip, whereas the source is just where it comes from.
     public AudioClip deathSound;
 
     float xmin;
@@ -19,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        float distance = transform.position.z - Camera.main.transform.position.z; // All of this stuffin Start is just doing the same stuff as the Formation Controller script.
+        float distance = transform.position.z - Camera.main.transform.position.z; // All of this stuff in Start is just doing the same stuff as the Formation Controller script.
         Vector3 leftmost = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance));
         Vector3 rightmost = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distance));
         xmin = leftmost.x + padding;
