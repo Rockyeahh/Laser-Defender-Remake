@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour {
     public AudioClip fireSound; //AudioClip is the clip, whereas the source is just where it comes from.
     public AudioClip deathSound;
 
+    public bool okToShoot = true;
+
     float xmin;
     float xmax;
 
@@ -23,25 +25,42 @@ public class PlayerController : MonoBehaviour {
         Vector3 rightmost = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distance));
         xmin = leftmost.x + padding;
         xmax = rightmost.x - padding;
+        //GameObject playerProjectile = GameObject.FindWithTag("Player Projectile");
     }
 
     void Fire()
     {
-        Vector3 offset = new Vector3(0, 1, 0);                              // Spawns up the positive y axis by one so that it doesn't damage the Player by spawning on it!
-        GameObject beam = Instantiate(projectile, transform.position + offset, Quaternion.identity) as GameObject;
-        beam.GetComponent<Rigidbody2D>().velocity = new Vector3(0, projectileSpeed, 0);             // projectileSpeed shoots the laser up the screen (positive y axis).
-        AudioSource.PlayClipAtPoint(fireSound, transform.position);
+        if (GameObject.FindGameObjectsWithTag("Player Projectile").Length == 0)     // I had this as <= 1 before.
+        {
+            Vector3 offset = new Vector3(0, 1, 0);                              // Spawns up the positive y axis by one so that it doesn't damage the Player by spawning on it!
+            GameObject beam = Instantiate(projectile, transform.position + offset, Quaternion.identity) as GameObject;
+            beam.GetComponent<Rigidbody2D>().velocity = new Vector3(0, projectileSpeed, 0);             // projectileSpeed shoots the laser up the screen (positive y axis).
+            AudioSource.PlayClipAtPoint(fireSound, transform.position);
+        }
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        //if (GameObject.FindGameObjectsWithTag("Player Projectile").Length >= 1) { Destroy(GameObject.FindWithTag("Player Projectile")); } // May not be needed. More of a safety net.
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            InvokeRepeating("Fire", 0.000001f, firingRate);
+            //InvokeRepeating("Fire", 0.000001f, firingRate);
+            //okToShoot bool = true;
+
+            //if (GameObject.FindGameObjectsWithTag("Player Projectile").Length >= 1) { Destroy(GameObject.FindWithTag("Player Projectile")); } // May not be needed. More of a safety net.
+
+            if (okToShoot == true)      // Currently pointless.
+            {
+                Fire();
+            }
+
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            CancelInvoke("Fire");
+            //CancelInvoke("Fire");
+            //okToShoot = false;    // Maybe Invoke okToShoot in 1f
         }
 
         if (Input.GetKey(KeyCode.LeftArrow))

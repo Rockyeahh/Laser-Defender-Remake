@@ -37,11 +37,14 @@ public class EnemyBehaviour : MonoBehaviour {
             }
     }
 
-    void Fire()
+    void Fire()      // WE NEED it to only allow one enemy shot screen at once.
     {
-        GameObject missile = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;    // Merely spawns the projectile.
-        missile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, -projectileSpeed, 0);       // It's -projectileSpeed because it's moving down the screen in the -y axis.
-        AudioSource.PlayClipAtPoint(fireSound, transform.position);
+        if (GameObject.FindGameObjectsWithTag("Projectile").Length == 0)     // I had this as <= 1 before.
+        {
+            GameObject missile = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;    // Merely spawns the projectile.
+            missile.GetComponent<Rigidbody2D>().velocity = new Vector3(0, -projectileSpeed, 0);       // It's -projectileSpeed because it's moving down the screen in the -y axis.
+            AudioSource.PlayClipAtPoint(fireSound, transform.position);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collider)
