@@ -13,6 +13,7 @@ public class EnemyBehaviour : MonoBehaviour {
     public AudioClip fireSound;
     public AudioClip deathSound;
     public Vector3 startPosition;
+    public GameObject explosionPrefab;
 
     private ScoreKeeper scoreKeeper;
 
@@ -67,5 +68,10 @@ public class EnemyBehaviour : MonoBehaviour {
         gameObject.SetActive(false);
         health = startingHealth; // Reset enemy health
         scoreKeeper.Score(scoreValue);  // Updates score.
+        print("explode");
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        // instantiate explosion prefab at transform.position.
+
+        // get and play the explosion SFX.
     }
 }

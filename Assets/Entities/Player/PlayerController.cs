@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour {
         AudioSource.PlayClipAtPoint(deathSound, transform.position);
         Destroy(gameObject);
         LevelManager man = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-        man.LoadScene("Win Screen");
+        man.LoadScene("Win Screen");        // Find a way to have this happen/invoke in like 3 seconds/3f.
     }
 
 }
