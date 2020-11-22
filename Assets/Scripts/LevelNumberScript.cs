@@ -12,13 +12,8 @@ public class LevelNumberScript : MonoBehaviour
     void Start()
     {
         levelNumberText = GetComponent<Text>();
-
-        //print("Starting " + Time.time);
-
         levelNumberCoroutine = UpdateLevel(2);
         StartCoroutine(levelNumberCoroutine);
-
-        //print("Before WaitAndPrint Finishes " + Time.time);
 
     }
 
@@ -27,8 +22,6 @@ public class LevelNumberScript : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(updateLevel);
-            //print("WaitAndPrint " + Time.time);
-            // if blerg enemies.length == 0 or null { levelNumbers += level; }
             if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
             {
                 LevelNumberInt(1);

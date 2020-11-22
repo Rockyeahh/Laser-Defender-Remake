@@ -38,7 +38,7 @@ public class EnemyBehaviour : MonoBehaviour {
             }
     }
 
-    void Fire()      // WE NEED it to only allow one enemy shot screen at once.
+    void Fire()
     {
         if (GameObject.FindGameObjectsWithTag("Projectile").Length == 0)     // I had this as <= 1 before.
         {
@@ -70,8 +70,5 @@ public class EnemyBehaviour : MonoBehaviour {
         scoreKeeper.Score(scoreValue);  // Updates score.
         print("explode");
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        // instantiate explosion prefab at transform.position.
-
-        // get and play the explosion SFX.
     }
 }

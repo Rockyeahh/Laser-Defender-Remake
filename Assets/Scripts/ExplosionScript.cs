@@ -8,4 +8,11 @@ public class ExplosionScript : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void LoadEndScreen()
+    {
+        LevelManager man = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        man.LoadScene("End Screen");
+    }
+
 }

@@ -10,7 +10,6 @@ public class GameController : MonoBehaviour
 
     private EnemyFormationParent enemyFormationParent;
 
-
     void Start()
     {
         enemyFormationParent = FindObjectOfType<EnemyFormationParent>();

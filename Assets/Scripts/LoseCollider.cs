@@ -6,8 +6,8 @@ public class LoseCollider : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D collider)
     {
-        print("Load a win screen");
+        print("Load a end screen");
         LevelManager levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-        levelManager.LoadScene("Win Screen");
+        levelManager.LoadScene("End Screen");
     }
 }
