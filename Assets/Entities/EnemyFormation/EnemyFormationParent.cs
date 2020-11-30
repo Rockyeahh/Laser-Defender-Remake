@@ -24,11 +24,11 @@ public class EnemyFormationParent : MonoBehaviour
 
     void Update()
     {
-        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
-        {
-            transform.position = startPosition;
-            print("Enemies are all dead trigger");
-        }
+       // if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+       // {
+          //  transform.position = startPosition;         // Refactored into the GameController Reset method.
+        //    print("Enemies are all dead trigger");
+       // }
 
     }
 

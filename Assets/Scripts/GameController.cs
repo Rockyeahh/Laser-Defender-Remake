@@ -5,10 +5,17 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    public Vector3 startPosition;
+
     public GameObject[] enemies;
     //public GameObject enemyBossPrefab;
 
     private EnemyFormationParent enemyFormationParent;
+
+    void Awake()
+    {
+        startPosition = transform.position;
+    }
 
     void Start()
     {
@@ -46,8 +53,10 @@ public class GameController : MonoBehaviour
 
     void Reset()    //Reset Enemies Maybe I should call it reset enemies?
     {
+        print("Enemies are all dead trigger");
         print("Reset Enemies");
         enemyFormationParent.IdleAnimation();
+        //transform.position = startPosition;       // currently having this commented out makes no difference to the game.
 
         // Enable Enemy gameObjects/children. // Game objects tagged as Enemy set disable
         if (enemies == null)
