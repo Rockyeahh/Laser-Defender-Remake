@@ -8,7 +8,6 @@ public class GameController : MonoBehaviour
     public Vector3 startPosition;
 
     public GameObject[] enemies;
-    //public GameObject enemyBossPrefab;
 
     private EnemyFormationParent enemyFormationParent;
 
@@ -21,27 +20,7 @@ public class GameController : MonoBehaviour
     {
         enemyFormationParent = FindObjectOfType<EnemyFormationParent>();
         GameObject levelNumberGameObject = GameObject.FindWithTag("Level Number");
-
-        //Start the coroutine we define below named ExampleCoroutine.
-       // StartCoroutine(CheckForEnemies());
     }
-
- //   IEnumerator CheckForEnemies()
- //  {
-        //Print the time of when the function is first called.
-      //  Debug.Log("Started Coroutine at timestamp : " + Time.time);
-
-        //yield on a new YieldInstruction that waits for 5 seconds.
-       // yield return new WaitForSeconds(2);
-
-        //After we have waited 5 seconds print the time again.
-     //   Debug.Log("Finished Coroutine at timestamp : " + Time.time);
-      //  if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
-    //    {
-            //Invoke("Reset", 2f);
-            //Reset();
-     //   }
-   // }
 
     void FixedUpdate()
     {
@@ -55,7 +34,7 @@ public class GameController : MonoBehaviour
     {
         print("Enemies are all dead trigger");
         print("Reset Enemies");
-        enemyFormationParent.IdleAnimation();
+        enemyFormationParent.EntranceAnimation();
         //transform.position = startPosition;       // currently having this commented out makes no difference to the game.
 
         // Enable Enemy gameObjects/children. // Game objects tagged as Enemy set disable

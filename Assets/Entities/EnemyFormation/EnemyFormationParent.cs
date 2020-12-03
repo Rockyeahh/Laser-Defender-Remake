@@ -1,40 +1,51 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyFormationParent : MonoBehaviour
 {
     public Vector3 startPosition;
-    private Animator animator;
+    public bool okToShoot = false;
 
+    private Animator animator;
     private Animation enemyFormationParentAnimationStart;
     private LevelNumberScript levelNumberScript;
+    private LevelStartScript levelStartScript;
 
     void Awake()
     {
-        startPosition = transform.position;
+        startPosition = transform.position; // currently pointless
     }
 
     void Start()
     {
+        levelStartScript = GameObject.Find("Level Start").GetComponent<LevelStartScript>();
         animator = gameObject.GetComponent<Animator>();
         enemyFormationParentAnimationStart = GetComponent<Animation>();
-        levelNumberScript = GameObject.Find("Level Number").GetComponent<LevelNumberScript>();
     }
 
-    void Update()
+    public void EntranceAnimation()
     {
-       // if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
-       // {
-          //  transform.position = startPosition;         // Refactored into the GameController Reset method.
-        //    print("Enemies are all dead trigger");
-       // }
-
+        animator.GetComponent<Animator>().Play("Enemy Entrance");
     }
 
-    public void IdleAnimation()
+    public void LevelStartAnimation()
     {
-        gameObject.GetComponent<Animator>().Play("Idle");
+        levelStartScript.LevelStartTextFade();
+    }
+
+    public void EnemyNotOkToShoot()
+    {
+        okToShoot = false;
+        print("Not ok to shoot");
+    }
+
+    public void EnemyOkToShoot()
+    {
+        okToShoot = true;
+        print("OK to shoot");
+        print("The player can start moving and shooting now.");
     }
 
 }

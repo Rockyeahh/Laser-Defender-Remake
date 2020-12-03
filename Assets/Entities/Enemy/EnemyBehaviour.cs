@@ -16,6 +16,7 @@ public class EnemyBehaviour : MonoBehaviour {
     public GameObject explosionPrefab;
 
     private ScoreKeeper scoreKeeper;
+    private EnemyFormationParent enemyFormationParent;
 
     void Awake()
     {
@@ -26,16 +27,21 @@ public class EnemyBehaviour : MonoBehaviour {
     void Start()
     {
         scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
+        enemyFormationParent = GameObject.Find("Enemy Formation Parent").GetComponent<EnemyFormationParent>();
     }
 
     void Update()
     {
         float probability = Time.deltaTime * shotsPerSecond;
 
+        if (enemyFormationParent.okToShoot == true)     // Try this with the PlayerController?
+        {
             if (Random.value < probability)     // Stops the enemy from shooting in a predicatable way.
             {
                 Fire();
             }
+        }
+
     }
 
     void Fire()
@@ -68,7 +74,6 @@ public class EnemyBehaviour : MonoBehaviour {
         gameObject.SetActive(false);
         health = startingHealth; // Reset enemy health
         scoreKeeper.Score(scoreValue);  // Updates score.
-        print("explode");
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
     }
 }

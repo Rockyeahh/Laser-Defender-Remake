@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour {
     public AudioClip deathSound;
     public GameObject explosionPlayerPrefab;
 
-    public bool okToShoot = true;
+    private EnemyFormationParent enemyFormationParent;
 
     float xmin;
     float xmax;
 
 	void Start () {
+        enemyFormationParent = GameObject.Find("Enemy Formation Parent").GetComponent<EnemyFormationParent>();
+
         float distance = transform.position.z - Camera.main.transform.position.z; // All of this stuff in Start is just doing the same stuff as the Formation Controller script.
         Vector3 leftmost = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance));
         Vector3 rightmost = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distance));
@@ -40,27 +42,32 @@ public class PlayerController : MonoBehaviour {
 	
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (enemyFormationParent.okToShoot == true)
         {
-            if (okToShoot == true)      // Currently pointless.
+                if (Input.GetKeyDown(KeyCode.Space))
             {
-                Fire();
+                //if (okToShoot == true)      // Currently pointless.
+                {
+                    Fire();
+                }
+
+            }
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                // Currently pointless
             }
 
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            // Currently pointless
-        }
-
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.position += Vector3.left * speed * Time.deltaTime;
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                transform.position += Vector3.left * speed * Time.deltaTime;
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
             transform.position += Vector3.right * speed * Time.deltaTime;
         }
+        }
+
+
 
         //restrict the player to the gamespace
         float newX = Mathf.Clamp(transform.position.x, xmin, xmax);
